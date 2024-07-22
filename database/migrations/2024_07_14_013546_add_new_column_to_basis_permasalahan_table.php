@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('basis_permasalahan', function (Blueprint $table) {
             $table->tinyInteger('bobot')->after('masalah');
-            $table->string('tindak_lanjut',50)->after('penanganan');
+            
         });
     }
 
@@ -24,7 +24,7 @@ return new class extends Migration
     {
         Schema::table('basis_permasalahan', function (Blueprint $table) {
             $table->dropColumn('bobot');
-            $table->dropColumn('tindak_lanjut');
+        
         });
     }
 };

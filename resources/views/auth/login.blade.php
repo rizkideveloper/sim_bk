@@ -20,6 +20,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
+            <img src="/assets/dist/img/logo.jpg" alt="logo" class="mb-2" width="120" height="120">
             <h5>Sistem Bimbingan dan Konseling SMK MedikaCom</h5>
         </div>
         <!-- /.login-logo -->
