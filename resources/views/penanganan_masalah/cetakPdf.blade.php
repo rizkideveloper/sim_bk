@@ -6,62 +6,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ $title }}</title>
-    {{-- <link rel="stylesheet" href="/pdf/pdf.css" type="text/css"> --}}
 
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ $_SERVER['DOCUMENT_ROOT'] }}/assets/dist/css/adminlte.min.css">
     <style>
-        table {
+        
+        h1,
+        h3,
+        h4,
+        h5,
+        h6 {
+            text-align: center;
+        }
+
+        #text-header {
+            margin-left: 100px;
+        }
+
+        .garis1 {
+            border-top: 3px solid black;
+            height: 2px;
             width: 100%;
-            border-collapse: collapse;
+            border-bottom: 1px solid black;
         }
 
-        table.products {
-            font-size: 0.875rem;
+        .tanggal {
+            margin-left: 75%;
         }
 
-        table.penanganan tr {
-            background-color: rgb(96 165 250);
-        }
-
-        table.penanganan th {
-            color: black;
-            padding: 0.5rem;
-        }
-
-        table tr.items {
-            background-color: rgb(241 245 249);
-        }
-
-        table tr.items td {
-            padding: 0.5rem;
+        .nama-sekolah {
+            font-size: 40px;
         }
     </style>
 </head>
 
 <body>
-    <h2>{{ $title }}</h2>
-    <p>{{ $tanggal_cetak }}</p>
 
-    <p>Daftar siswa yang sudah dilakukan penanganan masalah SMK Medikacom</p>
-    <table class="penanganan">
-        <tr>
-            <th>No</th>
-            <th>Tanggal Penanganan</th>
-            <th>Nama Siswa</th>
-            <th>Kelas</th>
-            <th>Masalah</th>
-            <th>Penanganan</th>
-        </tr>
-        @foreach ($penanganan_masalah as $item)
-            <tr class="items">
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ date('d F Y', strtotime($item->updated_at)) }}</td>
-                <td>{{ $item->nama_siswa }}</td>
-                <td>{{ $item->nama_kelas }}-{{ $item->nama_urutan }}-{{ $item->nama_jurusan }}</td>
-                <td>{{ $item->masalah }}</td>
-                <td>{{ $item->penanganan }}</td>
+    <header>
+        <div class="row">
+            <table>
+                <tr>
+                    <td>
+                        <div id="img" class="col-md-6">
+                            <img src="{{ $_SERVER['DOCUMENT_ROOT'] }}/assets/dist/img/logo.jpg" alt="AdminLTE Logo"
+                                id="logo" width="120" height="120">
+                        </div>
+                    </td>
+                    <td>
+                        <div id="text-header" class="col-md-6">
+                            <h3 class="nama-sekolah"> <strong>SMK Medikacom Bandung</strong></h3>
+                            <h6 class="alamatlogo">
+                                Jl. Rancabolang Soekarno-Hatta No. 10B</h6>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+
+        </div>
+    </header>
+
+    <hr class="garis1">
+    <div class="row">
+
+        <p class="tanggal">
+            Bandung, {{ $tanggal_cetak }}
+        </p>
+
+
+        <p>Daftar siswa yang sudah dilakukan penanganan masalah SMK Medikacom</p>
+        <table class="table table-striped">
+            <tr>
+                <th>No</th>
+                <th>Tanggal Penanganan</th>
+                <th>Nama Siswa</th>
+                <th>Kelas</th>
+                <th>Masalah</th>
+                <th>Penanganan</th>
             </tr>
-        @endforeach
-    </table>
+            @foreach ($penanganan_masalah as $item)
+                <tr class="items">
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ date('d F Y', strtotime($item->updated_at)) }}</td>
+                    <td>{{ $item->nama_siswa }}</td>
+                    <td>{{ $item->nama_kelas }}-{{ $item->nama_urutan }}-{{ $item->nama_jurusan }}</td>
+                    <td>{{ $item->masalah }}</td>
+                    <td>{{ $item->penanganan }}</td>
+                </tr>
+            @endforeach
+        </table>
+    </div>
+
+
+
+
 </body>
 
 </html>

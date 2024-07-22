@@ -196,7 +196,7 @@ class PenangananMasalahController extends Controller
             'tanggal_cetak' =>date('d F Y')
         ];
         
-        $pdf = Pdf::loadview('penanganan_masalah.cetakPdf', $data);
+        $pdf = Pdf::loadview('penanganan_masalah.cetakPdf', $data)->setPaper('a4', 'landscape');
         return $pdf->stream(date('dmY').'cetak_penanganan_masalah.pdf');
     }
 }
