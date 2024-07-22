@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SIF | Log in</title>
+    <title>SIF | Reset Password</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -25,24 +25,24 @@
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Silahkan Sign In</p>
+                <p class="login-box-msg">Reset Password</p>
 
-                @if (session()->has('loginError'))
+                @if (session()->has('emailError'))
                     <div class="alert alert-danger mt-3" role="alert">
-                        {{ session('loginError') }}
+                        {{ session('emailError') }}
                     </div>
                 @endif
 
-                @if (session()->has('resetSuccess'))
+                @if (session()->has('send_ResetSuccess'))
                     <div class="alert alert-success mt-3" role="alert">
-                        {{ session('resetSuccess') }}
+                        {{ session('send_ResetSuccess') }}
                     </div>
                 @endif
 
-                <form action="/login" method="post">
+                <form action="/forgot_password" method="post">
                     @csrf
                     <div class="input-group">
-                        <input type="email" class="form-control" name="email" placeholder="Email">
+                        <input type="email" class="form-control" placeholder="Email" name="email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -54,42 +54,29 @@
                             {{ $message }}
                         </small>
                     @enderror
-                    <div class="input-group mt-2">
-                        <input type="password" class="form-control" placeholder="Password" name="password">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>
-                    @error('password')
-                        <small class="text-danger">
-                            {{ $message }}
-                        </small>
-                    @enderror
                     <div class="row mt-3">
-                        <!-- /.col -->
-                        <div class="col">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-block">Request new password</button>
                         </div>
                         <!-- /.col -->
                     </div>
                 </form>
 
-                <p class="mt-2 float-right">
-                    <a href="/forgot_password">forgot password</a>
+                <p class="mt-3 mb-1">
+                    <a href="/">Login</a>
                 </p>
-                    <!-- /.login-card-body -->
             </div>
+            <!-- /.login-card-body -->
         </div>
-        <!-- /.login-box -->
+    </div>
+    <!-- /.login-box -->
 
-        <!-- jQuery -->
-        <script src="/assets/plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="/assets/dist/js/adminlte.min.js"></script>
+    <!-- jQuery -->
+    <script src="/assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/assets/dist/js/adminlte.min.js"></script>
 </body>
 
 </html>

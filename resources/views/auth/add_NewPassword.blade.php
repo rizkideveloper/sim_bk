@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SIF | Log in</title>
+    <title>SIF | Add New Password</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -25,36 +25,13 @@
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Silahkan Sign In</p>
+                <p class="login-box-msg">Add New Password
+                </p>
 
-                @if (session()->has('loginError'))
-                    <div class="alert alert-danger mt-3" role="alert">
-                        {{ session('loginError') }}
-                    </div>
-                @endif
-
-                @if (session()->has('resetSuccess'))
-                    <div class="alert alert-success mt-3" role="alert">
-                        {{ session('resetSuccess') }}
-                    </div>
-                @endif
-
-                <form action="/login" method="post">
+                <form action="/update_NewPassword/{{ $email }}" method="post">
                     @csrf
+                    @method('PUT')
                     <div class="input-group">
-                        <input type="email" class="form-control" name="email" placeholder="Email">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
-                            </div>
-                        </div>
-                    </div>
-                    @error('email')
-                        <small class="text-danger">
-                            {{ $message }}
-                        </small>
-                    @enderror
-                    <div class="input-group mt-2">
                         <input type="password" class="form-control" placeholder="Password" name="password">
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -67,29 +44,38 @@
                             {{ $message }}
                         </small>
                     @enderror
+                    <div class="input-group mt-2">
+                        <input type="password" class="form-control" placeholder="Confirm Password" name="konfirmasi_password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    @error('konfirmasi_password')
+                        <small class="text-danger">
+                            {{ $message }}
+                        </small>
+                    @enderror
                     <div class="row mt-3">
-                        <!-- /.col -->
-                        <div class="col">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-block">Change password</button>
                         </div>
                         <!-- /.col -->
                     </div>
                 </form>
-
-                <p class="mt-2 float-right">
-                    <a href="/forgot_password">forgot password</a>
-                </p>
-                    <!-- /.login-card-body -->
             </div>
+            <!-- /.login-card-body -->
         </div>
-        <!-- /.login-box -->
+    </div>
+    <!-- /.login-box -->
 
-        <!-- jQuery -->
-        <script src="/assets/plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="/assets/dist/js/adminlte.min.js"></script>
+    <!-- jQuery -->
+    <script src="/assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/assets/dist/js/adminlte.min.js"></script>
 </body>
 
 </html>

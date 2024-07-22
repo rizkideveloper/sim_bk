@@ -85,6 +85,8 @@ class UserController extends Controller
             'password_confirm' => 'required|min:8|same:password',
         ]);
 
+        
+
         User::create([
             'nip' => $request->nip,
             'nama' => $request->nama,

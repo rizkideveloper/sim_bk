@@ -22,14 +22,9 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-
-
-                                <div class="alert alert-success mt-3" role="alert" id="alert-success"
-                                    style="display: none">
-
-                                </div>
-
-
+                                <a href="/penangananMasalah/cetak_pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                                    <i class="fas fa-solid fa-file-pdf"></i> Download PDF
+                                </a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">

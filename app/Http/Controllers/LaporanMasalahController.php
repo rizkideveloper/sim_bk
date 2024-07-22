@@ -6,9 +6,11 @@ use App\Models\Kelas;
 use App\Models\LaporanMasalah;
 use App\Models\PenangananMasalah;
 use App\Models\Siswa;
+use App\Models\Tracking;
 use App\Models\User;
 use App\Models\Walikelas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LaporanMasalahController extends Controller
 {
@@ -23,7 +25,7 @@ class LaporanMasalahController extends Controller
 
         $data =[
             'title' => 'Data Laporan Masalah',
-            'laporan_masalah' => LaporanMasalah::all(),
+            'laporan_masalah' => LaporanMasalah::orderBy('status','ASC')->get(),
             'kelas' => $kelas
         ];
 
@@ -68,7 +70,18 @@ class LaporanMasalahController extends Controller
      */
     public function show(LaporanMasalah $laporanMasalah)
     {
-        //
+        $kelas = DB::table('laporan_masalah as lm')->select('kelas.nama as nama_kelas','kelas.urutan as nama_urutan','jurusan.nama as nama_jurusan')
+        ->join('siswa','siswa.id','=','lm.siswa_id')
+        ->join('kelas','kelas.id','=','siswa.kelas_id')
+        ->join('jurusan','jurusan.id','=','kelas.jurusan_id')
+        ->where('lm.id', $laporanMasalah->id)->first();
+
+        $data=[
+            'title' => 'Detail',
+            'penanganan_masalah' => PenangananMasalah::where('laporan_id',$laporanMasalah->id)->first(),
+            'kelas' => $kelas
+        ];
+        return view('laporan_masalah.detail', $data);
     }
 
     /**

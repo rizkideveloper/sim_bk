@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\BasisPermasalahan;
 use App\Models\LaporanMasalah;
 use App\Models\PenangananMasalah;
+use App\Models\Tracking;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -23,6 +25,7 @@ class PenangananMasalahController extends Controller
         ->join('jurusan','jurusan.id','=','kelas.jurusan_id')
         ->join('walikelas', 'walikelas.id','=','pm.walikelas_id')
         ->join('laporan_masalah as lm','lm.id','=','pm.laporan_id')
+        ->orderBy('status', 'ASC')
         ->get();
 
         $data =[
@@ -174,5 +177,26 @@ class PenangananMasalahController extends Controller
         }
 
         return response()->json($data);
+    }
+
+    public function cetakPdf()
+    {
+        $penanganan_masalah = DB::table('penanganan_masalah as pm')->select('pm.*','kelas.nama as nama_kelas','kelas.urutan as nama_urutan','jurusan.nama as nama_jurusan','walikelas.nama as nama_walikelas','siswa.nama as nama_siswa','lm.masalah')
+        ->join('laporan_masalah as lm','lm.id','=','pm.laporan_id')
+        ->join('walikelas','walikelas.id','=','pm.walikelas_id')
+        ->join('siswa','siswa.id','=','pm.siswa_id')
+        ->join('kelas','kelas.id','=','siswa.kelas_id')
+        ->join('jurusan','jurusan.id','=','kelas.jurusan_id')
+        ->where('pm.status', 'Sudah Ditangani')
+        ->get();
+
+        $data=[
+            'title' => 'Penaganan Masalah',
+            'penanganan_masalah' =>$penanganan_masalah,
+            'tanggal_cetak' =>date('d F Y')
+        ];
+        
+        $pdf = Pdf::loadview('penanganan_masalah.cetakPdf', $data);
+        return $pdf->stream(date('dmY').'cetak_penanganan_masalah.pdf');
     }
 }

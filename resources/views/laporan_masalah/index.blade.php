@@ -72,6 +72,11 @@
                                                     <a href="/laporanMasalah/kirimLaporan/{{ $item->id }}/{{ $item->siswa_id }}"
                                                         class="btn btn-sm   btn-primary" onclick="return confirm('Apakah kamu yakin akan mengirim data ini ke penaganan masalah?')"><i class="fas fa-paper-plane "></i></a>
                                                     @endif
+
+                                                    @if ($item->status == 'Sudah Ditangani' || $item->status == 'Sedang Ditangani')
+                                                        <a href=" /laporanMasalah/{{ $item->id }}"
+                                                        class="btn btn-sm   btn-primary"><i class="fas fa-eye "></i></a>
+                                                    @endif
                                                     
                                                 </td>
                                             </tr>

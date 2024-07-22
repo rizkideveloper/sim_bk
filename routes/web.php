@@ -14,7 +14,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AuthController::class, 'index'])->name('login.index')->middleware('guest');
 Route::post('/login',[AuthController::class, 'authenticate']);
+Route::get('/forgot_password',[AuthController::class, 'show_ForgotPassword']);
+Route::post('/forgot_password',[AuthController::class, 'forgot_password']);
 Route::post('/logout',[AuthController::class, 'logout']);
+Route::get('/add_NewPassword/{email}',[AuthController::class,'add_NewPassword']);
+Route::put('/update_NewPassword/{email}',[AuthController::class,'update_NewPassword']);
+
 
 Route::middleware('auth')->group(function (){
     Route::get('/user-profile', [UserController::class,'profile'])->name('profile');
@@ -33,6 +38,7 @@ Route::middleware('auth')->group(function (){
         Route::resource('/basisPermasalahan',BasisPermasalahanController::class);
 
         Route::post('penangananMasalah/check_KategoriMasalah',[PenangananMasalahController::class,'check_KategoriMasalah']);
+        Route::get('penangananMasalah/cetak_pdf',[PenangananMasalahController::class,'cetakPdf']);
         Route::resource('/penangananMasalah',PenangananMasalahController::class);
     });
 
